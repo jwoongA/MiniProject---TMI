@@ -1,22 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class OptionBtn : MonoBehaviour
 {
-    public AudioClip clip;
-    public AudioSource audioSource;
+    public GameObject optionBtn;
 
-    void Start()
+    [SerializeField] private AudioMixerGroup sfxGroup;
+    private AudioSource audioSource;
+    private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        audioSource.outputAudioMixerGroup = sfxGroup;
     }
-
-    public void popSound()
+    public void ToggleSlider()
     {
-        audioSource.PlayOneShot(clip);
+        if (optionBtn != null)
+        {
+            optionBtn.SetActive(!optionBtn.activeSelf);
+            SoundManager.Playsound(SoundType.CLICK);
+        }
     }
-
 
 }
 
