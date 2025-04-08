@@ -9,5 +9,6 @@ public class DifficultySelector : MonoBehaviour
     {
         PlayerPrefs.SetInt("SelectedDifficulty", level); // 저장
         SceneManager.LoadScene("GameScene"); // 메인씬으로 이동
+        GameManager.Instance.SettingGame();
     }
 }

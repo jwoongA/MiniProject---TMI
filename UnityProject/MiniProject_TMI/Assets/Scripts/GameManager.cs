@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public float time = 30.00f;
     public int cardCount = 0;
     public int difficulty = 1; // @김재영 수정
-    int curStage = 1;
+    public int curStage = 1;
 
     void Awake()
     {
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
+    public void SettingGame()
     {
         Time.timeScale = 1.0f;
 
@@ -36,28 +36,6 @@ public class GameManager : MonoBehaviour
             difficulty = PlayerPrefs.GetInt("SelectedDifficulty");
 
             // 난이도에 따라 시간 설정
-            //switch (difficulty)
-            //{
-            //    case 1:
-            //       time = 25f;
-            //        break;
-            //    case 2:
-            //       time = 20f;
-            //        break;
-            //    case 3:
-            //       time = 15f;
-            //        break;
-            //    case 4:
-            //       time = 45f;
-            //        break;
-            //    case 5:
-            //       time = 40f;
-            //        break;
-            //    case 6:
-            //       time = 35f;
-            //        break;
-            //}
-
             switch (this.curStage)
             {
                 case 1:
@@ -69,10 +47,11 @@ public class GameManager : MonoBehaviour
             }
             StartCoroutine(GameStart());
         }
-
     }
-    public IEnumerator GameStart()
+    IEnumerator GameStart()
     {
+        yield return new WaitForSeconds(1f);
+
         while (this.time >= 0)
         {
             this.time -= Time.deltaTime;

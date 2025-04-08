@@ -7,9 +7,10 @@ public class Button1 : MonoBehaviour
     public GameObject popupPanel;
 
     // Start is called before the first frame update
-    public void ShowPopup()
+    public void ShowPopup(int stageNum)
     {
         popupPanel.SetActive(true);
+        GameManager.Instance.curStage = stageNum;
     }
 
     public void HidePopup()
