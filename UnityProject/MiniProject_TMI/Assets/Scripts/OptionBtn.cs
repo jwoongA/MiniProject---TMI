@@ -5,23 +5,20 @@ using UnityEngine.Audio;
 
 public class OptionBtn : MonoBehaviour
 {
-    public GameObject optionBtn;
+   
+    public GameObject optionMenu;
 
-    [SerializeField] private AudioMixerGroup sfxGroup;
-    private AudioSource audioSource;
-    private void Start()
+    public void ToggleOptionMenu()
     {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.outputAudioMixerGroup = sfxGroup;
-    }
-    public void ToggleSlider()
-    {
-        if (optionBtn != null)
+        if (optionMenu != null)
         {
-            optionBtn.SetActive(!optionBtn.activeSelf);
-            SoundManager.Playsound(SoundType.CLICK);
+            optionMenu.SetActive(!optionMenu.activeSelf);
+
+            
+            AudioManager.instance.Playclick();
         }
     }
-
 }
+
+
 

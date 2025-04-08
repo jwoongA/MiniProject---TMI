@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -29,6 +29,12 @@ public class AudioManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+           
+            Destroy(gameObject);
         }
 
         bgmSource = BGM.GetComponent<AudioSource>();
@@ -56,15 +62,42 @@ public class AudioManager : MonoBehaviour
     public void Playmain()
 
     {
+        bgmSource.Stop();
         bgmSource.clip = mainstgClip;
-        bgmSource.loop = true; // π›∫π ¿Áª˝ ø¯«œ∏È
+        bgmSource.loop = true; // Î∞òÎ≥µ Ïû¨ÏÉù ÏõêÌïòÎ©¥
         bgmSource.Play();
     }
 
     public void Playstage()
     {
+        bgmSource.Stop();
         bgmSource.clip = stageClip;
         bgmSource.loop = true;
         bgmSource.Play();
     }
+
+    // 
+    public bool playMainOnStart;
+    public bool playStageOnStart;
+
+    private void Start()
+    {
+        
+
+        if (playMainOnStart)
+        {
+            
+            Playmain();
+        }
+
+        if (playStageOnStart)
+        {
+           
+            Playstage();
+        }
+    }
+
+    
+
+   
 }

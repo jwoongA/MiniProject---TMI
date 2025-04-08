@@ -58,6 +58,8 @@ MonoBehaviour:
   warningClip: {fileID: 8300000, guid: cc2c284b066f56243a75383ab0af46ee, type: 3}
   mainstgClip: {fileID: 8300000, guid: 58775ffc0e5551c49b624ff80894b73c, type: 3}
   stageClip: {fileID: 8300000, guid: 8417f5d04eca6604599b814a7e9d857f, type: 3}
+  playMainOnStart: 0
+  playStageOnStart: 0
 --- !u!1 &4674090339781735942
 GameObject:
   m_ObjectHideFlags: 0
