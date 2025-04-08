@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         else
         {
             UIManager.Instance.SetTimeText(0);
-            UIManager.Instance.OpenGameOverUI();
+            UIManager.Instance.SetGameOverUI(true);
             Time.timeScale = 0.0f;
         }
     }
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 
             if (this.cardCount == 0)
             {
-                UIManager.Instance.OpenGameOverUI();
+                UIManager.Instance.SetGameSuccessUI(true);
                 Time.timeScale = 0.0f;
             }
         }
