@@ -7,6 +7,9 @@ public class GoMainButton : MonoBehaviour
 {
     public void GoMain()
     {
+       
+        AudioManager.instance.Playclick();
+        AudioManager.instance.Playmain();
         SceneManager.LoadScene("StageScene");
     }
 }

@@ -11,6 +11,7 @@ public class Button1 : MonoBehaviour
     {
         popupPanel.SetActive(true);
         GameManager.Instance.curStage = stageNum;
+        AudioManager.instance.Playclick();
     }
 
     public void HidePopup()
