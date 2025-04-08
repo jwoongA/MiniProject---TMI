@@ -13,7 +13,7 @@ public class Card : MonoBehaviour
     public void Setting(int number)
     {   
         this.index = number;
-        this.frontImage.sprite = Resources.Load<Sprite>($"Member{index}");
+        this.frontImage.sprite = Resources.Load<Sprite>($"Member{index}_Zep");
     }
 
     public void OpenCard()
