@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class OptionBtn : MonoBehaviour
 {
-   
-  
-        public GameObject targetSlider;
+    public AudioClip clip;
+    public AudioSource audioSource;
 
-        public void ToggleSlider()
-        {
-            if (targetSlider != null)
-            {
-                targetSlider.SetActive(!targetSlider.activeSelf);
-            }
-        }
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    public void popSound()
+    {
+        audioSource.PlayOneShot(clip);
+    }
+
+
 }
 
