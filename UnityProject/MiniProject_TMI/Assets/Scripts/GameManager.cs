@@ -9,20 +9,52 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Card firstCard;
     [HideInInspector] public Card secondCard;
 
-    float time = 30.00f;
+    public float time = 30.00f;
     public int cardCount = 0;
+    public int difficulty = 1; // @김재영 수정
 
     public void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject); // @김재영 (싱글톤 패턴 + 씬 넘어가도 유지)
         }
     }
 
     void Start()
     {
         Time.timeScale = 1.0f;
+
+        //프로젝트 수정 (PlayerPrefs에서 난이도 불러오기)
+        if (PlayerPrefs.HasKey("SelectedDifficulty"))
+        {
+            difficulty = PlayerPrefs.GetInt("SelectedDifficulty");
+
+            // 난이도에 따라 시간 설정
+            switch (difficulty)
+            {
+                case 1:
+                   time = 25f;
+                    break;
+                case 2:
+                   time = 20f;
+                    break;
+                case 3:
+                   time = 15f;
+                    break;
+                case 4:
+                   time = 45f;
+                    break;
+                case 5:
+                   time = 40f;
+                    break;
+                case 6:
+                   time = 35f;
+                    break;
+            }
+        }
+
     }
 
     void Update()
