@@ -1,15 +1,10 @@
 using System.Threading;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
-    [Header("Text")]
-    [SerializeField] Text timeTxt;
-    [SerializeField] GameObject endTxt;
 
     [HideInInspector] public Card firstCard;
     [HideInInspector] public Card secondCard;
@@ -35,12 +30,12 @@ public class GameManager : MonoBehaviour
         if (this.time >= 0)
         {
             this.time -= Time.deltaTime;
-            this.timeTxt.text = this.time.ToString("N2");
+            UIManager.Instance.SetTimeText(this.time);
         }
         else
         {
-            this.timeTxt.text = "00.00";
-            this.endTxt.SetActive(true);
+            UIManager.Instance.SetTimeText(0);
+            UIManager.Instance.SetGameOverUI(true);
             Time.timeScale = 0.0f;
         }
     }
@@ -55,7 +50,7 @@ public class GameManager : MonoBehaviour
 
             if (this.cardCount == 0)
             {
-                this.endTxt.SetActive(true);
+                UIManager.Instance.SetGameSuccessUI(true);
                 Time.timeScale = 0.0f;
             }
         }
