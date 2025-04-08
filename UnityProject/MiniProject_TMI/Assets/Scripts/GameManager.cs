@@ -39,10 +39,10 @@ public class GameManager : MonoBehaviour
             switch (this.curStage)
             {
                 case 1:
-                    this.time = this.stage1Times[difficulty];
+                    this.time = this.stage1Times[difficulty - 1]; // @김재영 - 에러나서 -1 붙였습니다
                     break;
                 case 2:
-                    this.time = this.stage2Times[difficulty];
+                    this.time = this.stage2Times[difficulty - 1];
                     break;
             }
             StartCoroutine(GameStart());
