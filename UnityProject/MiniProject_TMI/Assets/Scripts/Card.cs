@@ -8,6 +8,8 @@ public class Card : MonoBehaviour
     [SerializeField] GameObject front;
     [SerializeField] GameObject back;
 
+    [SerializeField] Animator anim;
+
     [SerializeField] SpriteRenderer frontImage;
 
     public void Setting(int number)
@@ -18,8 +20,7 @@ public class Card : MonoBehaviour
 
     public void OpenCard()
     {
-        this.front.SetActive(true);
-        this.back.SetActive(false);
+        anim.SetBool("isOpen", true);
 
         if (GameManager.Instance.GetFirstCard() == null)
         {
@@ -30,6 +31,11 @@ public class Card : MonoBehaviour
             GameManager.Instance.SetScondCard(this);
             GameManager.Instance.isMatched();
         }
+    }
+    public void OpenCardanim()
+    {
+        this.front.SetActive(true);
+        this.back.SetActive(false);
     }
 
     public void DestroyCard()
@@ -49,7 +55,13 @@ public class Card : MonoBehaviour
 
     void CloseCardInvoke()
     {
+        anim.SetBool("isClose", true);
+    }
+    public void CloseCardAnim()
+    {
         this.front.SetActive(false);
         this.back.SetActive(true);
+        anim.SetBool("isClose", false);
+        anim.SetBool("isOpen", false);
     }
 }
