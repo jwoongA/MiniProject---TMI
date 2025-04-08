@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Text")]
     [SerializeField] Text timeTxt;
+    [SerializeField] Text remainingCardCount;
 
     [Header("Object")]
     [SerializeField] GameObject gameOverUI;
@@ -24,6 +25,10 @@ public class UIManager : MonoBehaviour
     }
 
     public void SetTimeText(float time) => this.timeTxt.text = time.ToString("N2");
-    public void SetGameOverUI(bool active) => this.gameOverUI.SetActive(active);
+    public void SetGameOverUI(bool active)
+    {
+        this.gameOverUI.SetActive(active);
+        this.remainingCardCount.text = $"{GameManager.Instance.cardCount.ToString()}Àå";
+    }
     public void SetGameSuccessUI(bool active) => this.gameSuccessUI.SetActive(active);
 }

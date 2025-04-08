@@ -1,4 +1,4 @@
-using System.Threading;
+using System.Collections;
 using UnityEngine;
 
 
@@ -9,11 +9,15 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Card firstCard;
     [HideInInspector] public Card secondCard;
 
+    float[] stage1Times = new float[3] { 25f, 20f, 15f };
+    float[] stage2Times = new float[3] { 45f, 40f, 35f};
+
     public float time = 30.00f;
     public int cardCount = 0;
     public int difficulty = 1; // @김재영 수정
+    int curStage = 1;
 
-    public void Awake()
+    void Awake()
     {
         if (Instance == null)
         {
@@ -32,45 +36,55 @@ public class GameManager : MonoBehaviour
             difficulty = PlayerPrefs.GetInt("SelectedDifficulty");
 
             // 난이도에 따라 시간 설정
-            switch (difficulty)
+            //switch (difficulty)
+            //{
+            //    case 1:
+            //       time = 25f;
+            //        break;
+            //    case 2:
+            //       time = 20f;
+            //        break;
+            //    case 3:
+            //       time = 15f;
+            //        break;
+            //    case 4:
+            //       time = 45f;
+            //        break;
+            //    case 5:
+            //       time = 40f;
+            //        break;
+            //    case 6:
+            //       time = 35f;
+            //        break;
+            //}
+
+            switch (this.curStage)
             {
                 case 1:
-                   time = 25f;
+                    this.time = this.stage1Times[difficulty];
                     break;
                 case 2:
-                   time = 20f;
-                    break;
-                case 3:
-                   time = 15f;
-                    break;
-                case 4:
-                   time = 45f;
-                    break;
-                case 5:
-                   time = 40f;
-                    break;
-                case 6:
-                   time = 35f;
+                    this.time = this.stage2Times[difficulty];
                     break;
             }
+            StartCoroutine(GameStart());
         }
 
     }
-
-    void Update()
+    public IEnumerator GameStart()
     {
-        if (this.time >= 0)
+        while (this.time >= 0)
         {
             this.time -= Time.deltaTime;
             UIManager.Instance.SetTimeText(this.time);
+            yield return null; // 다음 프레임까지 대기
         }
-        else
-        {
-            UIManager.Instance.SetTimeText(0);
-            UIManager.Instance.SetGameOverUI(true);
-            Time.timeScale = 0.0f;
-        }
+
+        UIManager.Instance.SetTimeText(0);
+        UIManager.Instance.SetGameOverUI(true);
+        Time.timeScale = 0.0f;
     }
+
 
     public void isMatched()
     {
