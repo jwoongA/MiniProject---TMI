@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject); // @±èÀç¿µ (½Ì±ÛÅæ ÆÐÅÏ + ¾À ³Ñ¾î°¡µµ À¯Áö)
         }
+        else { Destroy(gameObject); }  
     }
 
     public void SettingGame()
