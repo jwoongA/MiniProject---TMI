@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
         {
             Instance = this;
         }
+        else { Destroy(this.gameObject); }
     }
 
     public void SetTimeText(float time) => this.timeTxt.text = time.ToString("N2");
