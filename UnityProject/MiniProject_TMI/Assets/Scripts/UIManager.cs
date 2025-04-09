@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Text")]
     [SerializeField] Text timeTxt;
+    [SerializeField] Text stageInfoTxt;
     [SerializeField] Text remainingCardCount;
 
     [Header("Object")]
@@ -30,6 +31,11 @@ public class UIManager : MonoBehaviour
     {
         // null일 때 instance하는 것을 방지하기 위함
         GameManager.Instance.UIManagerOnEnable();
+    }
+
+    private void Start()
+    {
+        this.stageInfoTxt.text = GameManager.Instance.GetCurStageInfo();
     }
 
     // 게임 중 시간 Text 변경

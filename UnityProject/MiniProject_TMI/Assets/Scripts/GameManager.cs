@@ -135,4 +135,6 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
+
+    public string GetCurStageInfo() { return $"{curStage}-{this.difficulty}"; }
 }
