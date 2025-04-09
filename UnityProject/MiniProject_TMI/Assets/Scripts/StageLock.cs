@@ -25,12 +25,11 @@ public class StageLock : MonoBehaviour
         if(GameManager.Instance != null) // null üũ
         {
             bool stageClear = PlayerPrefs.GetInt($"Stage{GameManager.Instance.curStage}_Clear", 0) == 1;
-            if(GameManager.Instance.curStage + 1 == stageNum)
+            if(GameManager.Instance.curStage + 1 == this.stageNum)
             {
                 if (stageClear) { GameManager.Instance.OnEnableStageLock(this); }
                 else { Lock(); }
             }
-            
         }
     }
 
