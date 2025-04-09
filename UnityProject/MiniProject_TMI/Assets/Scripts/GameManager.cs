@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator GameStart()
+    IEnumerator GameStartRoutine()
     {
         while (this.time >= 0)
         {
@@ -73,8 +73,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0.0f;
     }
 
-    // UI Manager가 활성화됐는지 체크 후, 게임 시작
-    public void UIManagerOnEnable() => StartCoroutine(GameStart());
+    public void GameStart()
+    {
+        StartCoroutine(GameStartRoutine());
+    }
+
 
     #endregion
 
@@ -82,7 +85,7 @@ public class GameManager : MonoBehaviour
     public void isMatched()
     {
         // 두 카드가 일치하면 제거
-        if (this.firstCard.index == this.secondCard.index)
+        if (this.firstCard.index == this.secondCard.index && this.firstCard.cardType == this.secondCard.cardType)
         {
             this.firstCard.DestroyCard();
             this.secondCard.DestroyCard();

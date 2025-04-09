@@ -142,8 +142,10 @@ public class Board : MonoBehaviour
             else //배치 끝나면 리스트 초기화
             {
                 isMoving = false;
+                GameManager.Instance.GameStart();
                 cards.Clear();
                 pos.Clear();
+                
             }
         }
 

@@ -3,6 +3,7 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
     public int index = 0;
+    public string cardType;
 
     [Header("Genaral")]
     [SerializeField] GameObject front;
@@ -21,6 +22,7 @@ public class Card : MonoBehaviour
     public void Setting(int number, string type)  // @김재영 스테이지 2용 추가
     {
         this.index = number;
+        this.cardType = type;
         this.frontImage.sprite = Resources.Load<Sprite>($"Member{index}_{type}");
     }
 
