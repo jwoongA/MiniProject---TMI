@@ -27,12 +27,6 @@ public class UIManager : MonoBehaviour
         else { Destroy(this.gameObject); }
     }
 
-    void OnEnable()
-    {
-        // null일 때 instance하는 것을 방지하기 위함
-        GameManager.Instance.UIManagerOnEnable();
-    }
-
     private void Start()
     {
         this.stageInfoTxt.text = GameManager.Instance.GetCurStageInfo();

@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator GameStart()
+    IEnumerator GameStartRoutine()
     {
         while (this.time >= 0)
         {
@@ -73,8 +73,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0.0f;
     }
 
-    // UI Manager가 활성화됐는지 체크 후, 게임 시작
-    public void UIManagerOnEnable() => StartCoroutine(GameStart());
+    public void GameStart()
+    {
+        StartCoroutine(GameStartRoutine());
+    }
+
 
     #endregion
 
