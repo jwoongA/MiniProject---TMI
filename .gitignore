@@ -4,9 +4,6 @@
 #
 .utmp/
 /[Ll]ibrary/
-/Library
-/Package
-/Temp
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
@@ -77,6 +74,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 /UnityProject/MiniProject_TMI/Library
 /UnityProject/MiniProject_TMI/Temp
+/UnityProject/MiniProject_TMI/Logs
 /UnityProject/MiniProject_TMI/UserSettings
 /UnityProject/MiniProject_TMI/obj
-/UnityProject/MiniProject_TMI/Logs
