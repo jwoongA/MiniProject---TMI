@@ -22,14 +22,18 @@ public class StageLock : MonoBehaviour
     {
         // 해당 스크립트를 갖고 있는 Stage가 클리어 된 적있는지 체크
         // 정보가 없다면 Lock
-        if(GameManager.Instance != null) // null 체크
+        bool stageClear = PlayerPrefs.GetInt($"Stage{this.stageNum}_Clear", 0) == 1;
+        if (GameManager.Instance != null) // null 체크
         {
-            bool stageClear = PlayerPrefs.GetInt($"Stage{GameManager.Instance.curStage}_Clear", 0) == 1;
             if(GameManager.Instance.curStage + 1 == this.stageNum)
             {
                 if (stageClear) { GameManager.Instance.OnEnableStageLock(this); }
                 else { Lock(); }
             }
+        }
+        else if (!stageClear)
+        {
+            Lock();
         }
     }
 
