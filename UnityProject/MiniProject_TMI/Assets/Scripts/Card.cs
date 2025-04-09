@@ -12,10 +12,16 @@ public class Card : MonoBehaviour
 
     [SerializeField] SpriteRenderer frontImage;
 
-    public void Setting(int number)
+    public void Setting(int number)  // @김재영 스테이지 2의 이미지 배치를 위해 타입 추가 
     {   
         this.index = number;
-        this.frontImage.sprite = Resources.Load<Sprite>($"Member{index}_Zep");
+        this.frontImage.sprite = Resources.Load<Sprite>($"Member{index}_zep"); 
+    }
+
+    public void Setting(int number, string type)  // @김재영 스테이지 2용 추가
+    {
+        this.index = number;
+        this.frontImage.sprite = Resources.Load<Sprite>($"Member{index}_{type}");
     }
 
     public void OpenCard()

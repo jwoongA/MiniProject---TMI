@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Linq;
+using System.Collections.Generic;
 
 public class Board : MonoBehaviour
 {
@@ -66,28 +67,42 @@ public class Board : MonoBehaviour
 
     void Stage2()
     {
-        int[] arr = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 };
-        arr = arr.OrderBy(x => Random.Range(0f, 9f)).ToArray();
+        int[] zeparr = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4 }; //@ 김재영 리얼 카드 이미지를 사용하기 위해 이 부분 수정
+        int[] realarr = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4 };
+
+        List<(int, string)> cardList = new List<(int, string)>();
+
+        foreach (int i in zeparr)
+        {
+            cardList.Add((i, "Zep"));
+        }
+        foreach (int i in realarr)
+        {
+            cardList.Add((i, "Real"));
+        }
+        cardList = cardList.OrderBy(x => Random.Range(0f, 9f)).ToList();
 
         float spacing = 1.4f; // 카드 간격 (원하는 만큼 조절)
         int columns = 4;
         int rows = 5;
 
-        for (int i = 0; i < arr.Length; i++)
+        for (int i = 0; i < cardList.Count; i++)
         {
-            GameObject go = Instantiate(this.card, this.transform);
+            GameObject go = Instantiate(this.card, cards); // @김재영 스테이지 1과 2가 동일학게 배치되서 수정.
 
             int column = i % columns;
             int row = i / columns;
             float yOffset = -1.0f;
 
             float x = (column - (columns - 1) / 2f) * spacing;
-            float y = ((rows - 1) / 2f - row) * spacing + yOffset; // 중앙 배치를 하게되면 카드가 시간을 가려서 전체적인 y 좌표를 아래로 내림.
+            float y = ((rows - 1) / 2f - row) * spacing + yOffset; // @김재영 중앙 배치를 하게되면 카드가 시간을 가려서 전체적인 y 좌표를 아래로 내림.
 
             go.transform.position = new Vector2(x, y);
-            go.GetComponent<Card>().Setting(arr[i]);
+
+            var (index, type) = cardList[i];
+            go.GetComponent<Card>().Setting(index, type);
         }
 
-        GameManager.Instance.cardCount = arr.Length;
+        GameManager.Instance.cardCount = cardList.Count;
     }
 }
