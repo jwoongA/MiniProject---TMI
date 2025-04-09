@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
     public void isMatched()
     {
         // 두 카드가 일치하면 제거
-        if (this.firstCard.index == this.secondCard.index)
+        if (this.firstCard.index == this.secondCard.index && this.firstCard.cardType == this.secondCard.cardType)
         {
             this.firstCard.DestroyCard();
             this.secondCard.DestroyCard();
