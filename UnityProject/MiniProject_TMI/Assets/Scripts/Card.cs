@@ -27,6 +27,7 @@ public class Card : MonoBehaviour
     public void OpenCard()
     {
         anim.SetBool("isOpen", true);
+        AudioManager.instance.Playflip();
 
         if (GameManager.Instance.GetFirstCard() == null)
         {

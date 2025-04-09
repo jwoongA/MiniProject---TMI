@@ -1,12 +1,18 @@
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
-
+using DG.Tweening;
 public class Board : MonoBehaviour
 {
-    [SerializeField] Transform cards;
+    [SerializeField] float speed;
+
     [SerializeField] GameObject card;
 
+    [SerializeField] List<GameObject> cards;
+    [SerializeField] List<Vector3> pos;
+
+    int Lcount = 0;
+    bool isMoving = false;
     void Start()
     {
         int difficulty = PlayerPrefs.GetInt("SelectedDifficulty");
@@ -42,8 +48,10 @@ public class Board : MonoBehaviour
 
             float x = (column - 1) * spacing;  // -1, 0, 1
             float y = (1 - row) * spacing;     // 1, 0
-
-            go.transform.position = new Vector2(x, y);
+            go.transform.position = new Vector2(0, 4.56f);
+            //go.transform.position = new Vector2(x, y);
+            cards.Add(go); //오브젝트 리스트 추가
+            pos.Add(new Vector3(x, y)); //좌표값 pos 리스트에 추가
             go.GetComponent<Card>().Setting(arr[i]);
         }
 
@@ -57,17 +65,20 @@ public class Board : MonoBehaviour
 
             float x = column * (spacing / 2);  // - spacing / 2, spacing / 2
             float y = (-1 - row) * spacing;      // -1, -2
-
-            go.transform.position = new Vector2(x, y);
+            go.transform.position = new Vector2(0, 4.56f);
+            //go.transform.position = new Vector2(x, y);
+            cards.Add(go);
+            pos.Add(new Vector3(x, y));
             go.GetComponent<Card>().Setting(arr[i + 6]);
         }
 
         GameManager.Instance.cardCount = arr.Length;
+        isMoving = true;
     }
 
     void Stage2()
     {
-        int[] zeparr = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4 }; //@ 김재영 리얼 카드 이미지를 사용하기 위해 이 부분 수정
+        int[] zeparr = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4 }; 
         int[] realarr = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4 };
 
         List<(int, string)> cardList = new List<(int, string)>();
@@ -88,21 +99,53 @@ public class Board : MonoBehaviour
 
         for (int i = 0; i < cardList.Count; i++)
         {
-            GameObject go = Instantiate(this.card, cards); // @김재영 스테이지 1과 2가 동일학게 배치되서 수정.
+            GameObject go = Instantiate(this.card, this.transform); 
 
             int column = i % columns;
             int row = i / columns;
             float yOffset = -1.0f;
 
             float x = (column - (columns - 1) / 2f) * spacing;
-            float y = ((rows - 1) / 2f - row) * spacing + yOffset; // @김재영 중앙 배치를 하게되면 카드가 시간을 가려서 전체적인 y 좌표를 아래로 내림.
+            float y = ((rows - 1) / 2f - row) * spacing + yOffset;
 
-            go.transform.position = new Vector2(x, y);
+            //카드 배치전 위치
+            go.transform.position = new Vector2(0, 4.56f);
+            //go.transform.position = new Vector2(x, y);
+            cards.Add(go);
+            pos.Add(new Vector3(x, y));
 
             var (index, type) = cardList[i];
             go.GetComponent<Card>().Setting(index, type);
         }
 
         GameManager.Instance.cardCount = cardList.Count;
+        isMoving = true;
+    }
+
+    private void Update()
+    {
+        if (isMoving)
+        {
+            if (Lcount < cards.Count)
+            {
+                //카드 목표 위치 지정
+                GameObject go = cards[Lcount];
+                Vector3 target = pos[Lcount];
+                //카드 이동
+                //go.transform.position = Vector3.Lerp(go.transform.position, target, speed * Time.deltaTime);
+                go.transform.DOMove(target, 0.3f);
+                if (Vector3.Distance(go.transform.position, target) < 1.5f)
+                {
+                    Lcount++;
+                }
+            }
+            else //배치 끝나면 리스트 초기화
+            {
+                isMoving = false;
+                cards.Clear();
+                pos.Clear();
+            }
+        }
+
     }
 }

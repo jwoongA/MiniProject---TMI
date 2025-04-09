@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
             this.firstCard.DestroyCard();
             this.secondCard.DestroyCard();
             this.cardCount -= 2;
+            AudioManager.instance.Playcorrect();
 
             // 모든 카드를 제거하면 클리어
             if (this.cardCount == 0)
@@ -93,6 +94,8 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 0.0f;
                 StopAllCoroutines();
                 UIManager.Instance.SetGameSuccessUI(true);
+                
+                AudioManager.instance.Playclear();
             }
         }
         else
@@ -100,6 +103,7 @@ public class GameManager : MonoBehaviour
             // 일치하지 않으면, 다시 뒤집기
             this.firstCard.CloseCard();
             this.secondCard.CloseCard();
+            AudioManager.instance.Playwrong();
         }
 
         // 초기화
