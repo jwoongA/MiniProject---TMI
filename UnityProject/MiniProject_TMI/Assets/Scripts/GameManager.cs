@@ -24,13 +24,14 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); // @김재영 (싱글톤 패턴 + 씬 넘어가도 유지)
+#if UNITY_EDITOR
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+            //Debug.Log("PlayerPrefs 초기화됨");
+#endif
         }
         else { Destroy(gameObject); }
 
-#if UNITY_EDITOR
-        // 테스트를 위해 매번 재실행 시 마다, PlayerPrefs 초기화 
-        PlayerPrefs.DeleteAll();
-#endif
 
     }
 
@@ -89,8 +90,9 @@ public class GameManager : MonoBehaviour
             // 모든 카드를 제거하면 클리어
             if (this.cardCount == 0)
             {
-                UIManager.Instance.SetGameSuccessUI(true);
                 Time.timeScale = 0.0f;
+                StopAllCoroutines();
+                UIManager.Instance.SetGameSuccessUI(true);
             }
         }
         else
@@ -118,7 +120,7 @@ public class GameManager : MonoBehaviour
     // 다음 스테이지의 해금을 위해 클리어 정보 저장
     public void Clear3Lv()
     {
-        PlayerPrefs.SetInt($"Stage{this.curStage}_Clear", 1);
+        SetCurStageClearInfo();
         PlayerPrefs.Save();
         this.isFistClear = true;
     }
@@ -130,11 +132,17 @@ public class GameManager : MonoBehaviour
         // 해금 애니메이션 재생
         if (this.isFistClear) 
         { 
-            stageLock.UnLock(); 
+            stageLock.PlayUnlockAnim(); 
             this.isFistClear = false; 
+        }
+        else
+        {
+            stageLock.Unlock();
         }
     }
     #endregion
 
     public string GetCurStageInfo() { return $"{curStage}-{this.difficulty}"; }
+    public int GetCurStageClearInfo() { return PlayerPrefs.GetInt($"Stage{this.curStage}_Clear", 0); }
+    public void SetCurStageClearInfo() { PlayerPrefs.SetInt($"Stage{this.curStage}_Clear", 1); }
 }

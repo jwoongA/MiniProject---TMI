@@ -64,7 +64,7 @@ public class UIManager : MonoBehaviour
         this.gameSuccessUI.SetActive(active);
 
         // Lv 3를 처음 클리어한 것인지 체크
-        bool firstClear = PlayerPrefs.GetInt($"Stage{GameManager.Instance.curStage}_Clear", 0) == 0;
+        bool firstClear = GameManager.Instance.GetCurStageClearInfo() == 0;
         if (GameManager.Instance.difficulty == 3 && firstClear) 
         { 
             // 첫 클리어라면 해금을 위해 다시하기 버튼을 없앰

@@ -10,5 +10,7 @@ public class GoMainButton : MonoBehaviour
         AudioManager.instance.Playclick();
         AudioManager.instance.Playmain();
         SceneManager.LoadScene("StageScene");
+
+        Time.timeScale = 1.0f;
     }
 }
