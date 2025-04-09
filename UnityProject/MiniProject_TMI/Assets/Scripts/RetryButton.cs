@@ -7,7 +7,6 @@ public class RetryButton : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
         GameManager.Instance.SettingGame();
-        //Time.timeScale = 1.0f;
     }
 }
  
