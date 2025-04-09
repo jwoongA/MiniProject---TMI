@@ -809,8 +809,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76028c2cae578c347aacaf74c024c164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cards: {fileID: 1174163907}
+  speed: 10
   card: {fileID: 4385499209739491263, guid: b477f0a6d1e861b4791f36d66326d1ef, type: 3}
+  cards: []
+  pos: []
 --- !u!4 &1174163907
 Transform:
   m_ObjectHideFlags: 0
