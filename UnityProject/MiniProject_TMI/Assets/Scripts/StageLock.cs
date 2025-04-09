@@ -61,36 +61,4 @@ public class StageLock : MonoBehaviour
         Unlock();
     }
 
-    //IEnumerator UnlockAnim()
-    //{
-    //    if (anim == null)
-    //        anim = GetComponentInChildren<Animator>();
-
-    //    yield return null;
-
-    //    anim.runtimeAnimatorController = animController;
-
-    //    if (anim.runtimeAnimatorController != null)
-    //    {
-    //        //anim.SetBool("isUnLock", true);
-    //        anim.SetTrigger("IsUnlockAnim");
-    //    }
-    //    else
-    //    {
-    //        Debug.LogWarning("AnimatorController가 아직 안 붙었어요!");
-    //    }
-
-    //    yield return new WaitForSeconds(2f);
-
-    //    // Lock 오브젝트 비활성화, 버튼 기능 활성화, Shadow 활성화(가시성)
-
-    //    //anim.SetBool("isUnLock", false);
-    //    this.stageLock.SetActive(false);
-    //    this.btnStage.enabled = true;
-    //    this.btnStageShadow.enabled = true;
-
-        
-
-    //    yield break;
-    //}
 }

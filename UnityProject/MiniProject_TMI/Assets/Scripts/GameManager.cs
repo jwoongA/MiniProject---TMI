@@ -24,14 +24,15 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); // @±Ë¿Áøµ (ΩÃ±€≈Ê ∆–≈œ + æ¿ ≥—æÓ∞°µµ ¿Ø¡ˆ)
-#if UNITY_EDITOR
-            PlayerPrefs.DeleteAll();
-            PlayerPrefs.Save();
-            //Debug.Log("PlayerPrefs √ ±‚»≠µ ");
-#endif
+
         }
         else { Destroy(gameObject); }
 
+#if UNITY_EDITOR
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+        //Debug.Log("PlayerPrefs √ ±‚»≠µ ");
+#endif
 
     }
 
