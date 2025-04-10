@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -25,6 +27,15 @@ public class AudioManager : MonoBehaviour
     public AudioClip stageClip;
     public AudioClip unlockClip;
 
+    public float GetBGMVolume()
+    {
+        return bgmSource.volume;
+    }
+    public float GetSFXVolume()
+    {
+        return sfxSource.volume;
+    }
+
     void Awake()
     {
         if (instance == null)
@@ -40,6 +51,8 @@ public class AudioManager : MonoBehaviour
 
         bgmSource = BGM.GetComponent<AudioSource>();
         sfxSource = SFX.GetComponent<AudioSource>();
+
+        
     }
 
     public void SetBGMVolume(float value)
@@ -80,26 +93,7 @@ public class AudioManager : MonoBehaviour
         bgmSource.Play();
     }
 
-    // 
-    public bool playMainOnStart;
-    public bool playStageOnStart;
-
-    private void Start()
-    {
-        
-
-        if (playMainOnStart)
-        {
-            
-            Playmain();
-        }
-
-        if (playStageOnStart)
-        {
-           
-            Playstage();
-        }
-    }
+  
 
     
 

@@ -61,13 +61,21 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameStartRoutine()
     {
+        bool warningPlayed = false;
+
         while (this.time >= 0)
         {
             this.time -= Time.deltaTime;
             UIManager.Instance.SetTimeText(this.time);
+
+            if (!warningPlayed && this.time <= 5.0f)
+            {
+                AudioManager.instance.Playwarning();
+                warningPlayed = true;
+            }
             yield return null; // 다음 프레임까지 대기
         }
-
+        
         UIManager.Instance.SetTimeText(0);
         UIManager.Instance.SetGameOverUI(true);
         Time.timeScale = 0.0f;
