@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using DG.Tweening;
+using System.Collections;
 public class Board : MonoBehaviour
 {
     [SerializeField] float speed;
@@ -73,7 +74,7 @@ public class Board : MonoBehaviour
         }
 
         GameManager.Instance.cardCount = arr.Length;
-        isMoving = true;
+        StartCoroutine(CardMoving());
     }
 
     void Stage2()
@@ -119,34 +120,21 @@ public class Board : MonoBehaviour
         }
 
         GameManager.Instance.cardCount = cardList.Count;
-        isMoving = true;
+        StartCoroutine(CardMoving());
     }
 
-    private void Update()
+    IEnumerator CardMoving()
     {
-        if (isMoving)
+        for (int i = 0; i < cards.Count; i++)
         {
-            if (Lcount < cards.Count)
-            {
-                //카드 목표 위치 지정
-                GameObject go = cards[Lcount];
-                Vector3 target = pos[Lcount];
-                //카드 이동
-                //go.transform.position = Vector3.Lerp(go.transform.position, target, speed * Time.deltaTime);
-                go.transform.DOMove(target, 0.3f);               
-                if (Vector3.Distance(go.transform.position, target) < 1.5f)
-                {
-                    Lcount++;
-                    AudioManager.instance.Playshare();
-                }
-            }
-            else //배치 끝나면 리스트 초기화
-            {
-                isMoving = false;
-                GameManager.Instance.GameStart();
-                cards.Clear();
-                pos.Clear();               
-            }
+            GameObject go = cards[i];
+            Vector3 target = pos[i];
+            go.transform.DOMove(target, 0.25f);
+            AudioManager.instance.Playshare();
+            yield return new WaitForSeconds(0.08f);
         }
+        GameManager.Instance.GameStart();
+        cards.Clear();
+        pos.Clear();
     }
 }
