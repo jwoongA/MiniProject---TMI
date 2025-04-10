@@ -9,6 +9,24 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
+    [SerializeField] private Slider bgmSlider;
+    [SerializeField] private Slider sfxSlider;
+
+    void Start()
+    {
+        // 저장된 볼륨 값 불러오기 (기본값 1f)
+        float savedBGM = PlayerPrefs.GetFloat("bgmSource", 1f);
+        float savedSFX = PlayerPrefs.GetFloat("sfxSource", 1f);
+
+        // AudioSource에 볼륨 적용
+        bgmSource.volume = savedBGM;
+        sfxSource.volume = savedSFX;
+
+        // 슬라이더 UI에도 적용
+        if (bgmSlider != null) bgmSlider.value = savedBGM;
+        if (sfxSlider != null) sfxSlider.value = savedSFX;
+    }
+
     public GameObject BGM;
     public GameObject SFX;
 
@@ -26,6 +44,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip mainstgClip;
     public AudioClip stageClip;
     public AudioClip unlockClip;
+
+   
 
     public float GetBGMVolume()
     {
@@ -52,17 +72,28 @@ public class AudioManager : MonoBehaviour
         bgmSource = BGM.GetComponent<AudioSource>();
         sfxSource = SFX.GetComponent<AudioSource>();
 
-        
+        if (PlayerPrefs.HasKey("bgmSource"))
+        {
+            float savedbgmvolume = PlayerPrefs.GetFloat("bgmSource");
+            bgmSource.volume = savedbgmvolume;
+        }
+        if (PlayerPrefs.HasKey("sfxSource"))
+        {
+            float savedsfxvolume = PlayerPrefs.GetFloat("sfxSource");
+            sfxSource.volume = savedsfxvolume;
+        }
     }
 
     public void SetBGMVolume(float value)
     {
         bgmSource.volume = value;
+        PlayerPrefs.SetFloat("bgmSource", value);
     }
 
     public void SetSFXVolume(float value)
     {
         sfxSource.volume = value;
+        PlayerPrefs.SetFloat("sfxSource", value);
     }
 
     public void Playclick() => sfxSource.PlayOneShot(clickClip);
@@ -91,11 +122,5 @@ public class AudioManager : MonoBehaviour
         bgmSource.clip = stageClip;
         bgmSource.loop = true;
         bgmSource.Play();
-    }
-
-  
-
-    
-
-   
+    }   
 }
