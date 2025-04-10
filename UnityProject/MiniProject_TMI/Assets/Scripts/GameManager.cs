@@ -28,12 +28,16 @@ public class GameManager : MonoBehaviour
         }
         else { Destroy(gameObject); }
 
-#if UNITY_EDITOR
-        PlayerPrefs.DeleteAll();
-        PlayerPrefs.Save();
-        //Debug.Log("PlayerPrefs 초기화됨");
-#endif
+    }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C)) 
+        {
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+            //Debug.Log("PlayerPrefs 초기화됨");
+        }
     }
 
     #region 게임 세팅 및 시작
