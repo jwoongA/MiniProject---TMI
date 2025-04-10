@@ -133,10 +133,11 @@ public class Board : MonoBehaviour
                 Vector3 target = pos[Lcount];
                 //카드 이동
                 //go.transform.position = Vector3.Lerp(go.transform.position, target, speed * Time.deltaTime);
-                go.transform.DOMove(target, 0.3f);
+                go.transform.DOMove(target, 0.3f);               
                 if (Vector3.Distance(go.transform.position, target) < 1.5f)
                 {
                     Lcount++;
+                    AudioManager.instance.Playshare();
                 }
             }
             else //배치 끝나면 리스트 초기화
@@ -144,10 +145,8 @@ public class Board : MonoBehaviour
                 isMoving = false;
                 GameManager.Instance.GameStart();
                 cards.Clear();
-                pos.Clear();
-                
+                pos.Clear();               
             }
         }
-
     }
 }
