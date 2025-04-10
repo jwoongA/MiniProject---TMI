@@ -26,11 +26,11 @@ public class OptionBtn : MonoBehaviour
     {
         string currentScene = SceneManager.GetActiveScene().name;
 
-        if (currentScene == "StartScene" || currentScene == "StageScene")
+        if (currentScene == "StageScene")
         {
             gameObject.SetActive(true);
         }
-        else if (currentScene == "GameScene")
+        else if (currentScene == "StartScene" || currentScene == "GameScene")
         {
             gameObject.SetActive(false);
         }
