@@ -21,11 +21,11 @@ public class OptionBtnController : MonoBehaviour
     {
         string currentScene = scene.name;
 
-        if (currentScene == "StartScene" || currentScene == "StageScene")
+        if (currentScene == "StageScene")
         {
             if (optionBtn != null) optionBtn.SetActive(true);
         }
-        else if (currentScene == "GameScene")
+        else if (currentScene == "GameScene" || currentScene == "StartScene")
         {
             if (optionBtn != null) optionBtn.SetActive(false);
         }
