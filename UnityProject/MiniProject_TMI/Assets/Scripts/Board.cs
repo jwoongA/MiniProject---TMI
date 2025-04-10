@@ -11,9 +11,6 @@ public class Board : MonoBehaviour
 
     [SerializeField] List<GameObject> cards;
     [SerializeField] List<Vector3> pos;
-
-    int Lcount = 0;
-    bool isMoving = false;
     void Start()
     {
         int difficulty = PlayerPrefs.GetInt("SelectedDifficulty");
