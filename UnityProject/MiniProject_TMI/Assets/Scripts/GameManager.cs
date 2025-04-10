@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 0.0f;
                 StopAllCoroutines();
                 UIManager.Instance.SetGameSuccessUI(true);
-                
+                AudioManager.instance.Stopbgm();
                 AudioManager.instance.Playclear();
             }
         }
@@ -140,7 +140,8 @@ public class GameManager : MonoBehaviour
         // 해금 애니메이션 재생
         if (this.isFistClear) 
         { 
-            stageLock.PlayUnlockAnim(); 
+            stageLock.PlayUnlockAnim();
+            AudioManager.instance.Playunlock();
             this.isFistClear = false; 
         }
         else

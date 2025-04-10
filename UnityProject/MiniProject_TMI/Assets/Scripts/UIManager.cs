@@ -44,6 +44,7 @@ public class UIManager : MonoBehaviour
     // 게임 오버 UI의 활성화/비활성화 관리
     public void SetGameOverUI(bool active)
     {
+        AudioManager.instance.Stopbgm();
         AudioManager.instance.Playover();
         this.gameOverUI.SetActive(active);
         if (this.remainingCardCount != null) // 혹시 모를 null 체크

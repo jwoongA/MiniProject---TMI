@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip warningClip;
     public AudioClip mainstgClip;
     public AudioClip stageClip;
+    public AudioClip unlockClip;
 
     void Awake()
     {
@@ -59,6 +60,9 @@ public class AudioManager : MonoBehaviour
     public void Playclear() => sfxSource.PlayOneShot(gameclearClip);
     public void Playover() => sfxSource.PlayOneShot(gameoverClip);
     public void Playwarning() => sfxSource.PlayOneShot(warningClip);
+    public void Playunlock() => sfxSource.PlayOneShot(unlockClip);
+
+    public void Stopbgm() => bgmSource.Stop();
     public void Playmain()
 
     {

@@ -1203,6 +1203,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6256783799833773888, guid: 097c6dd4db358d74c9a0d721a2714391, type: 3}
+      propertyPath: unlockClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ea047f80f1f44964eaee1afaf5f30e3d, type: 3}
+    - target: {fileID: 6256783799833773888, guid: 097c6dd4db358d74c9a0d721a2714391, type: 3}
       propertyPath: playMainOnStart
       value: 1
       objectReference: {fileID: 0}
